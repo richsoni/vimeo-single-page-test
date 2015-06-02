@@ -36,7 +36,7 @@ $ curl https://vimeo.com/api/v2/channel/332146/videos.json | json_reformat
 ## Info (by Channel ID)
 
 ```
-$ curl https://vimeo.com/api/v2/channel/332146/info.json | json_reformat
+$ curl https://vimeo.com/api/v2/channel/staffpicks/info.json | json_reformat
 {
     "id": 332146,
     "name": "Bob Dylan",
@@ -51,6 +51,23 @@ $ curl https://vimeo.com/api/v2/channel/332146/info.json | json_reformat
     "creator_url": "https://vimeo.com/user6153775",
     "total_videos": 19,
     "total_subscribers": 12
+}
+
+$ curl https://vimeo.com/api/v2/channel/staffpicks/info.json | json_reformat
+{
+    "id": 927,
+    "name": "Vimeo Staff Picks",
+    "description": "We really love videos, and these are the videos we really, really love. All of these videos have been hand picked by the real humans who work at Vimeo. We hope you enjoy them!",
+    "logo": "https://i.vimeocdn.com/channel/289181_980?mh=250",
+    "badge": "",
+    "url": "https://vimeo.com/channels/staffpicks",
+    "rss": "https://vimeo.com/channels/staffpicks/videos/rss",
+    "created_on": "2007-10-23 13:00:43",
+    "creator_id": 152184,
+    "creator_display_name": "Vimeo Staff",
+    "creator_url": "https://vimeo.com/staff",
+    "total_videos": 9290,
+    "total_subscribers": 177680
 }
 ```
 
