@@ -1,6 +1,15 @@
 C = require("./constants")
 module.exports = React.createClass({
-  propTypes: C.INFO_PROPS,
+  propTypes: _.extend({}, C.INFO_PROPS, {
+    style: React.PropTypes.object
+  }),
+
+  getDefaultProps: function() {
+    return {
+      style: {}
+    }
+  },
+
   _style: {
     link: {
       color: '#fff'
@@ -8,7 +17,7 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    return <div>
+    return <div style={this.props.style}>
       <div>Created By: <a style={this._style.link} href={this.props.creator_url}>{this.props.creator_display_name}</a> in {moment(this.props.created_on).format('YYYY')}</div>
       <div>{this.props.description}</div>
       <div><a style={this._style.link} href={this.props.rss}><i className='fa fa-rss'></i>{this.props.name}</a></div>

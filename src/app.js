@@ -1,5 +1,7 @@
 global.React  = require("react")
 global.moment = require("moment")
+global._      = require("underscore")
+
 RootComponent = require("./rootComponent")
 const STAFF_INFO = {
     "id": 927,
