@@ -33,5 +33,5 @@ const BD_INFO = {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-  React.render(<RootComponent {...STAFF_INFO} />, document.body)
+  React.render(<RootComponent {...BD_INFO} />, document.body)
 });

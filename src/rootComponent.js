@@ -10,19 +10,22 @@ Logo = React.createClass({
   },
 
   propTypes: {
-    src: React.PropTypes.string,
-    alt: React.PropTypes.string
+    src:  React.PropTypes.string,
+    alt:  React.PropTypes.string,
+    href: React.PropTypes.string
   },
 
   render: function(){
+      return <div style={this._style.container}>
+        <a style={{textDecoration: 'none'}} href={this.props.href}> {this._content()} </a>
+      </div>
+  },
+
+  _content: function() {
     if (this.props.src.length > 0){
-      return <div style={this._style.container}>
-        <img style={{maxWidth: '100%'}} src={this.props.src} alt={this.props.alt} />
-      </div>
+      return <img style={{maxWidth: '100%'}} src={this.props.src} alt={this.props.alt} />
     } else {
-      return <div style={this._style.container}>
-        {this.props.alt}
-      </div>
+      return <span style={{color: '#fff'}}>{this.props.alt}</span>
     }
   }
 })
@@ -46,7 +49,7 @@ module.exports = React.createClass({
 
   render: function(){
     return <article>
-      <Logo src={this.props.logo} alt={this.props.name} />
+      <Logo src={this.props.logo} alt={this.props.name} href={this.props.url} />
     </article>
   }
 })
