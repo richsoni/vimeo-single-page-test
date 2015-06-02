@@ -1,4 +1,5 @@
 global.React  = require("react")
+global.moment = require("moment")
 RootComponent = require("./rootComponent")
 const STAFF_INFO = {
     "id": 927,
@@ -33,5 +34,5 @@ const BD_INFO = {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-  React.render(<RootComponent {...BD_INFO} />, document.body)
+  React.render(<RootComponent {...STAFF_INFO} />, document.body)
 });
