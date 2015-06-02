@@ -1,6 +1,22 @@
 global.React  = require("react")
 RootComponent = require("./rootComponent")
-const INFO = {
+const STAFF_INFO = {
+    "id": 927,
+    "name": "Vimeo Staff Picks",
+    "description": "We really love videos, and these are the videos we really, really love. All of these videos have been hand picked by the real humans who work at Vimeo. We hope you enjoy them!",
+    "logo": "https://i.vimeocdn.com/channel/289181_980?mh=250",
+    "badge": "",
+    "url": "https://vimeo.com/channels/staffpicks",
+    "rss": "https://vimeo.com/channels/staffpicks/videos/rss",
+    "created_on": "2007-10-23 13:00:43",
+    "creator_id": 152184,
+    "creator_display_name": "Vimeo Staff",
+    "creator_url": "https://vimeo.com/staff",
+    "total_videos": 9290,
+    "total_subscribers": 177680
+}
+
+const BD_INFO = {
     "id": 332146,
     "name": "Bob Dylan",
     "description": "",
@@ -17,5 +33,5 @@ const INFO = {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-  React.render(<RootComponent {...INFO} />, document.body)
+  React.render(<RootComponent {...STAFF_INFO} />, document.body)
 });

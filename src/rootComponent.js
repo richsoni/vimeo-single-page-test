@@ -17,7 +17,7 @@ Logo = React.createClass({
   render: function(){
     if (this.props.src.length > 0){
       return <div style={this._style.container}>
-        <img src={this.props.src} alt={this.props.alt} />
+        <img style={{maxWidth: '100%'}} src={this.props.src} alt={this.props.alt} />
       </div>
     } else {
       return <div style={this._style.container}>
