@@ -1,3 +1,13 @@
+Video = React.createClass({
+  propTypes: {
+    video: React.PropTypes.object
+  },
+
+  render: function(){
+    return <div>video</div>
+  }
+})
+
 module.exports = React.createClass({
   propTypes: {
     videos: React.PropTypes.array,
@@ -12,7 +22,11 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    return <div> here </div>
+    return <div>
+      {this.props.videos.map(function(video){
+        return <Video video={video} />
+      })}
+    </div>
   }
 })
 
