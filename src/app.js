@@ -3,6 +3,34 @@ global.moment = require("moment")
 global._      = require("underscore")
 
 var RootComponent = require("./rootComponent")
+const BD_VIDEOS = [
+    {
+        "id": 15956330,
+        "title": "Bob Dylan - \"The Witmark Demos: 1962-1964\"",
+        "description": "Revisit Bob Dylan's earliest days in New York City and the recording sessions that first made him famous on \"The Witmark Demos: 1962-1964,\" the latest installment of The Bootleg Series. For more information, visit http://www.bobdylan.com and order the album at http://bit.ly/bobdylanstore",
+        "url": "https://vimeo.com/15956330",
+        "upload_date": "2010-10-18 12:49:23",
+        "mobile_url": "https://vimeo.com/15956330",
+        "thumbnail_small": "https://i.vimeocdn.com/video/96945104_100x75.jpg",
+        "thumbnail_medium": "https://i.vimeocdn.com/video/96945104_200x150.jpg",
+        "thumbnail_large": "https://i.vimeocdn.com/video/96945104_640.jpg",
+        "user_id": 3712455,
+        "user_name": "Columbia Records",
+        "user_url": "https://vimeo.com/columbiarecords",
+        "user_portrait_small": "https://i.vimeocdn.com/portrait/778835_30x30.jpg",
+        "user_portrait_medium": "https://i.vimeocdn.com/portrait/778835_75x75.jpg",
+        "user_portrait_large": "https://i.vimeocdn.com/portrait/778835_100x100.jpg",
+        "user_portrait_huge": "https://i.vimeocdn.com/portrait/778835_300x300.jpg",
+        "stats_number_of_likes": 176,
+        "stats_number_of_plays": 43173,
+        "stats_number_of_comments": 12,
+        "duration": 336,
+        "width": 640,
+        "height": 360,
+        "tags": "Bob Dylan, The Witmark Demos, Bootleg Series",
+        "embed_privacy": "anywhere"
+    }
+]
 const STAFF_INFO = {
     "id": 927,
     "name": "Vimeo Staff Picks",
@@ -36,5 +64,5 @@ const BD_INFO = {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-  React.render(<RootComponent {...STAFF_INFO} />, document.body)
+  React.render(<RootComponent {...STAFF_INFO} videos={BD_VIDEOS} />, document.body)
 });

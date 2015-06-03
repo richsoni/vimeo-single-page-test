@@ -1,6 +1,7 @@
-var Logo = require("./logoComponent")
-var Meta = require("./metaComponent")
-var C    = require("./constants")
+var Logo   = require("./logoComponent")
+var Meta   = require("./metaComponent")
+var Videos = require("./videosComponent")
+var C      = require("./constants")
 
 style = {
   logo: {
@@ -20,37 +21,24 @@ style = {
     boxSizing: 'border-box'
   }
 }
-// style = {
-//   vCenter: {
-//     position: 'relative',
-//     top: '50%',
-//     transform: 'translateY(-50%)'
-//   },
-//   logo: {
-//     float: 'left'
-//   },
-//   meta: {
-//     maxWidth: 300,
-//     float: 'left',
-//   },
-//   info: {
-//     width: '100%',
-//     backgroundColor: '#333',
-//     minHeight: '6em',
-//     overflow: 'hidden',
-//     padding: '1em',
-//     height: '9vw'
-//   }
-// }
-
-// style.meta = _.extend(style.meta, style.vCenter)
 
 module.exports = React.createClass({
-  propTypes: C.INFO_PROPS,
+  propTypes: _.extend({},C.INFO_PROPS, {
+    videos: React.PropTypes.array
+  }),
 
   render: function(){
     return <div>
       <section style={style.info}>
+        <iframe
+          src="//player.vimeo.com/video/VIDEO_ID?portrait=0&color=333"
+          width='100%'
+          frameborder="0"
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        />
+        <Videos style={style.videos} videos={this.props.videos} />
         <Logo style={style.logo} src={this.props.logo} alt={this.props.name} href={this.props.url} />
         <Meta style={style.meta} {...this.props} />
       </section>
