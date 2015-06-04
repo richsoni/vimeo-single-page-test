@@ -27,14 +27,6 @@ class RootComponent extends React.Component {
   render() {
     return <div>
       <section style={style.info}>
-        <iframe
-          src="//player.vimeo.com/video/VIDEO_ID?portrait=0&color=333"
-          width='100%'
-          frameborder="0"
-          webkitallowfullscreen
-          mozallowfullscreen
-          allowfullscreen
-        />
         <Videos style={style.videos}  />
         <Logo style={style.logo} src={this.props.logo} alt={this.props.name} href={this.props.url} />
         <Meta style={style.meta} {...this.props} />

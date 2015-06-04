@@ -8,6 +8,7 @@
   },
   "author": "rich soni",
   "dependencies": {
+    "array.prototype.findindex": "^1.0.0",
     "babel": "^5.4.7",
     "baconjs": "^0.7.61",
     "browserify": "^10.2.3",

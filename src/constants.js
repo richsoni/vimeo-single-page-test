@@ -13,5 +13,10 @@ module.exports = {
     creator_url:          React.PropTypes.string,
     total_videos:         React.PropTypes.number,
     total_subscribers:    React.PropTypes.number
+  },
+  ACTIONS: {
+    VIDEO: {
+      ACTIVE: {}
+    }
   }
 }
