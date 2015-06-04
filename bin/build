@@ -1,2 +1,2 @@
 #!/bin/bash
-browserify -t reactify -d src/app.js -o app.js
+browserify -t [reactify --es6] -d src/app.js -o app.js
