@@ -11,6 +11,7 @@ class VideoStore {
   constructor(data) {
     this.__data = new Immutable.List(data)
   }
+  list(){ return this.__data.toArray() }
 }
 
 class Controller {
@@ -22,7 +23,7 @@ class Controller {
   }
 
   render() {
-    React.render(<RootComponent {...this.info} videos={this.videoStore.__data} />, document.body)
+    React.render(<RootComponent {...this.info} videos={this.videoStore.list()} />, document.body)
   }
 }
 
