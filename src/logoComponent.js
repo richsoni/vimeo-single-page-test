@@ -1,39 +1,39 @@
-module.exports = React.createClass({
-  propTypes: {
-    src:   React.PropTypes.string,
-    alt:   React.PropTypes.string,
-    href:  React.PropTypes.string,
-    style: React.PropTypes.object
-  },
+style = {
+  container: {
+    height: 200,
+    fontSize: '4em',
+    textAlign: 'center',
+    backgroundSize: "contain",
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
+  }
+}
 
-  getDefaultProps: function() {
-    return {
-      style: {}
-    }
-  },
+class LogoComponent extends React.Component {
 
-  _style: {
-    container: {
-      height: 200,
-      fontSize: '4em',
-      textAlign: 'center',
-      backgroundSize: "contain",
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center'
-    }
-  },
-
-  render: function(){
-      return <div style={_.extend({}, this.props.style, this._style.container, {backgroundImage: "url("+this.props.src+")"})}>
+  render() {
+      return <div style={_.extend({}, this.props.style, style.container, {backgroundImage: "url("+this.props.src+")"})}>
         <a style={{textDecoration: 'none'}} href={this.props.href}> {this._content()} </a>
       </div>
-  },
+  }
 
-  _content: function() {
+  _content() {
     if (this.props.src.length > 0){
       return "";
     } else {
       return <span style={{color: '#fff'}}>{this.props.alt}</span>
     }
   }
-})
+}
+
+LogoComponent.propTypes = {
+  src:   React.PropTypes.string,
+  alt:   React.PropTypes.string,
+  href:  React.PropTypes.string,
+  style: React.PropTypes.object
+}
+
+LogoComponent.defaultProps = {
+  style: {}
+}
+module.exports = LogoComponent

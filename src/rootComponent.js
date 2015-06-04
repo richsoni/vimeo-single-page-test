@@ -22,12 +22,9 @@ style = {
   }
 }
 
-module.exports = React.createClass({
-  propTypes: _.extend({},C.INFO_PROPS, {
-    videos: React.PropTypes.array
-  }),
+class RootComponent extends React.Component {
 
-  render: function(){
+  render() {
     return <div>
       <section style={style.info}>
         <iframe
@@ -44,4 +41,9 @@ module.exports = React.createClass({
       </section>
     </div>
   }
+}
+
+RootComponent.propTypes = _.extend({},C.INFO_PROPS, {
+    videos: React.PropTypes.array
 })
+module.exports = RootComponent

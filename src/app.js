@@ -3,9 +3,15 @@ global.moment = require("moment")
 global._      = require("underscore")
 
 var RootComponent = require("./rootComponent")
-const SEEDS = require("./seeds")
+const SEEDS       = require("./seeds")
 
-function render(){
+class Controller {
+  constructor() {
+    stream = Bacon.Bus()
+  }
+}
+
+var render = () => {
   React.render(<RootComponent {...SEEDS.STAFF_INFO} videos={SEEDS.BD_VIDEOS} />, document.body)
 }
 
