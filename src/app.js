@@ -9,11 +9,13 @@ const SEEDS       = require("./seeds")
 class Controller {
   constructor() {
     this.stream = Bacon.Bus()
+    this.videos = SEEDS.BD_VIDEOS
+    this.info   = SEEDS.STAFF_INFO
     this.render()
   }
 
   render() {
-    React.render(<RootComponent {...SEEDS.STAFF_INFO} videos={SEEDS.BD_VIDEOS} />, document.body)
+    React.render(<RootComponent {...this.info} videos={this.videos} />, document.body)
   }
 }
 
