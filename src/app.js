@@ -9,7 +9,7 @@ const SEEDS       = require("./seeds")
 class Controller {
   constructor() {
     this.stream = Bacon.Bus()
-    document.addEventListener("DOMContentLoaded", this.render);
+    this.render()
   }
 
   render() {
@@ -17,4 +17,6 @@ class Controller {
   }
 }
 
-global.App = new Controller()
+document.addEventListener("DOMContentLoaded", () => {
+  global.App = new Controller()
+});
