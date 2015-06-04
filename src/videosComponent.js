@@ -1,3 +1,5 @@
+var VideoStore = require("./videoStore")
+
 class Video extends React.Component {
   render() {
     return <div>{this.props.title}</div>
@@ -32,9 +34,15 @@ Video.propTypes = {
 
 class Videos extends React.Component {
 
+  constructor() {
+    this.state = {
+      videos: VideoStore.list()
+    }
+  }
+
   render() {
     return <div>
-      {this.props.videos.map(function(video){
+      {this.state.videos.map(function(video){
         return <Video {...video} />
       })}
     </div>

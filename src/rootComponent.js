@@ -35,7 +35,7 @@ class RootComponent extends React.Component {
           mozallowfullscreen
           allowfullscreen
         />
-        <Videos style={style.videos} videos={this.props.videos} />
+        <Videos style={style.videos}  />
         <Logo style={style.logo} src={this.props.logo} alt={this.props.name} href={this.props.url} />
         <Meta style={style.meta} {...this.props} />
       </section>
@@ -44,6 +44,6 @@ class RootComponent extends React.Component {
 }
 
 RootComponent.propTypes = _.extend({},C.INFO_PROPS, {
-    videos: React.PropTypes.array
+    info: React.PropTypes.object
 })
 module.exports = RootComponent
