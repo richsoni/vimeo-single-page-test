@@ -4,7 +4,7 @@ global._      = require("underscore")
 
 var RootComponent = require("./rootComponent")
 const BD_VIDEOS = require("./bd_videos")
-const SP_VIDEOS = require("./sp_videos")
+
 const STAFF_INFO = {
     "id": 927,
     "name": "Vimeo Staff Picks",
