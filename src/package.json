@@ -1,0 +1,23 @@
+{
+  "name": "vimeo",
+  "version": "1.0.0",
+  "description": "## Videos (by channel id) ``` $ curl https://vimeo.com/api/v2/channel/332146/videos.json | json_reformat [     {         \"id\": 15956330,         \"title\": \"Bob Dylan - \\\"The Witmark Demos: 1962-1964\\\"\",         \"description\": \"Revisit Bob Dylan's earliest days in New York City and the recording sessions that first made him famous on \\\"The Witmark Demos: 1962-1964,\\\" the latest installment of The Bootleg Series. For more information, visit http://www.bobdylan.com and order the album at http://bit.ly/bobdylanstore\",         \"url\": \"https://vimeo.com/15956330\",         \"upload_date\": \"2010-10-18 12:49:23\",         \"mobile_url\": \"https://vimeo.com/15956330\",         \"thumbnail_small\": \"https://i.vimeocdn.com/video/96945104_100x75.jpg\",         \"thumbnail_medium\": \"https://i.vimeocdn.com/video/96945104_200x150.jpg\",         \"thumbnail_large\": \"https://i.vimeocdn.com/video/96945104_640.jpg\",         \"user_id\": 3712455,         \"user_name\": \"Columbia Records\",         \"user_url\": \"https://vimeo.com/columbiarecords\",         \"user_portrait_small\": \"https://i.vimeocdn.com/portrait/778835_30x30.jpg\",         \"user_portrait_medium\": \"https://i.vimeocdn.com/portrait/778835_75x75.jpg\",         \"user_portrait_large\": \"https://i.vimeocdn.com/portrait/778835_100x100.jpg\",         \"user_portrait_huge\": \"https://i.vimeocdn.com/portrait/778835_300x300.jpg\",         \"stats_number_of_likes\": 176,         \"stats_number_of_plays\": 43173,         \"stats_number_of_comments\": 12,         \"duration\": 336,         \"width\": 640,         \"height\": 360,         \"tags\": \"Bob Dylan, The Witmark Demos, Bootleg Series\",         \"embed_privacy\": \"anywhere\"     } ] ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rich soni",
+  "dependencies": {
+    "babel": "^5.4.7",
+    "baconjs": "^0.7.61",
+    "browserify": "^10.2.3",
+    "del": "^1.2.0",
+    "ejs": "^2.3.1",
+    "immutable": "^3.7.3",
+    "moment": "^2.10.3",
+    "react": "^0.13.3",
+    "react-hotkey": "^0.3.0",
+    "reactify": "^1.1.1",
+    "underscore": "^1.8.3"
+  }
+}
