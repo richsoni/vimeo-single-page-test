@@ -19,16 +19,24 @@ class VideoView extends React.Component {
 
 class Video extends React.Component {
   render() {
-    return <div onClick={this._onClick.bind(this)} style={this._style()}>{this.props.title}</div>
+    return <div onClick={this._onClick.bind(this)} style={this._style()}></div>
   }
 
   _onClick() {
-    controller.eventStream.push({action: C.ACTIONS.VIDEO.ACTIVE, payload: this.props.id})
+    controller.eventStream.push({action: C.ACTIONS.VIDEO.ACTIVE, payload: this.props.video})
   }
 
   _style() {
-    var result = {}
-    if (this.props.active){ result.color = 'red'; }
+    var result = {
+      width: 50,
+      height: 50,
+      backgroundColor: 'red',
+      float: 'left',
+      borderColor: 'white',
+      borderStyle: 'solid',
+      borderWidth: 1
+    }
+    if (this.props.active){ result.borderColor = 'black'; }
     return result;
   }
 }
@@ -63,14 +71,14 @@ Video.propTypes = {
 class Videos extends React.Component {
 
   constructor() {
+    var list = VideoStore.list()
     this.state = {
-      videos: VideoStore.list(),
-      currentIndex: 0
+      videos: list,
+      currentVideo: list[0]
     }
     controller.eventStream.onValue((stream) => {
       if(stream.action === C.ACTIONS.VIDEO.ACTIVE){
-        var index = this.state.videos.findIndex((video) => {return video.id === stream.payload})
-        this.setState({currentIndex: index})
+        this.setState({currentVideo: stream.payload})
       }
     })
   }
@@ -78,12 +86,12 @@ class Videos extends React.Component {
   render() {
     return <div>
       <VideoView
-        {...this.state.videos[this.state.currentIndex]}
+        {...this.state.currentVideo}
       />
-      Current Video = {this.state.videos[this.state.currentIndex].title}
       {this.state.videos.map((video, index) => {
-        return <Video {...video} key={index} active={index === this.state.currentIndex} />
+        return <Video {...video} key={video.id} video={video} active={video === this.state.currentVideo} />
       })}
+      Current Video = {this.state.currentVideo.title}
     </div>
   }
 }
