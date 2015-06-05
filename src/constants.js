@@ -51,7 +51,8 @@ module.exports = {
   },
 
   COLORS: {
-    BLUE: 'rgb(0, 173, 239)'
+    BLUE: 'rgb(0, 173, 239)',
+    DIM:  '#AEAEAE'
   }
 
 }

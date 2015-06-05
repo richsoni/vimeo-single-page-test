@@ -4,9 +4,13 @@ prettyNum = require("./prettyNum")
 class Marquee extends React.Component {
   render() {
     var meta = <div style={{marginTop: 10}}>
-          <span> <i className='fa fa-heart'></i> {prettyNum(this.props.stats_number_of_likes)}</span>
-          <span style={{margin: '0 2em'}}> <i className='fa fa-play'></i> {prettyNum(this.props.stats_number_of_plays)}</span>
-          <span> <i className='fa fa-comment'></i> {prettyNum(this.props.stats_number_of_comments)}</span>
+          <span style={{color: C.COLORS.DIM}}> <i className='fa fa-play'></i> {prettyNum(this.props.stats_number_of_plays)}</span>
+          <a style={{margin: '0 2em', fontWeight: 'bold', color: '#fff', textDecoration: 'none'}} href={this._likesURL()}>
+            <i className='fa fa-heart'></i> {prettyNum(this.props.stats_number_of_likes)}
+          </a>
+          <span style={{color: C.COLORS.DIM}}>
+            <i className='fa fa-comment'></i> {prettyNum(this.props.stats_number_of_comments)}
+          </span>
         </div>
     if(this.props.active){
       return <div style={this._style()}>
@@ -23,7 +27,8 @@ class Marquee extends React.Component {
     }
   }
 
-  _extras() {
+  _likesURL() {
+    return `https://vimeo.com/${this.props.id}/likes`
   }
 
   _style() {
