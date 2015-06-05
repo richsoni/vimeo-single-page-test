@@ -42,7 +42,16 @@ module.exports = {
   },
   ACTIONS: {
     VIDEO: {
-      ACTIVE: {}
+      PLAY: {}
+    },
+    MARQUEE: {
+      LOAD:  {},
+      CLEAR: {}
     }
+  },
+
+  COLORS: {
+    BLUE: 'rgb(0, 173, 239)'
   }
+
 }

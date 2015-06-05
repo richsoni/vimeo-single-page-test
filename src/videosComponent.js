@@ -1,5 +1,6 @@
 require('array.prototype.findindex')
 var VideoStore = require("./videoStore")
+var Marquee    = require("./marqueeComponent")
 var controller = require("./controller")
 var C          = require("./constants")
 
@@ -18,25 +19,46 @@ class VideoView extends React.Component {
 }
 
 class Video extends React.Component {
+  constructor(){
+    this.state = {hover: false}
+  }
+
   render() {
-    return <div onClick={this._onClick.bind(this)} style={this._style()}></div>
+    return <div
+      onMouseOut={this._onMouseOut.bind(this)}
+      onMouseOver={this._onMouseOver.bind(this)}
+      onClick={this._onClick.bind(this)}
+      style={this._style()}
+    >
+    </div>
+  }
+
+  _onMouseOut(){
+    this.setState({hover: false})
+    controller.eventStream.push({action: C.ACTIONS.MARQUEE.CLEAR, payload: null})
+  }
+
+  _onMouseOver(){
+    this.setState({hover: true})
+    controller.eventStream.push({action: C.ACTIONS.MARQUEE.LOAD, payload: this.props.video})
   }
 
   _onClick() {
-    controller.eventStream.push({action: C.ACTIONS.VIDEO.ACTIVE, payload: this.props.video})
+    controller.eventStream.push({action: C.ACTIONS.VIDEO.PLAY, payload: this.props.video})
   }
 
   _style() {
     var result = {
       width: 50,
       height: 50,
-      backgroundColor: 'red',
       float: 'left',
-      borderColor: 'white',
+      borderColor: 'black',
       borderStyle: 'solid',
-      borderWidth: 1
+      borderWidth: 3,
+      backgroundImage: `url(${this.props.thumbnail_small})`
     }
-    if (this.props.active){ result.borderColor = 'black'; }
+    if (this.state.hover && !this.props.active) { result.borderColor = 'white' }
+    if (this.props.active){ result.borderColor = C.COLORS.BLUE; }
     return result;
   }
 }
@@ -44,30 +66,44 @@ Video.propTypes = _.extend({}, C.VIDEO_PROPS, {
   active:                   React.PropTypes.bool
 })
 
+Video.propTypes = _.extend({}, C.VIDEO_PROPS, {})
+
 class Videos extends React.Component {
 
   constructor() {
     var list = VideoStore.list()
     this.state = {
       videos: list,
-      currentVideo: list[0]
+      currentVideo: list[0],
+      hoverVideo:   null
     }
     controller.eventStream.onValue((stream) => {
-      if(stream.action === C.ACTIONS.VIDEO.ACTIVE){
+      if(stream.action === C.ACTIONS.MARQUEE.CLEAR){
+        this.setState({hoverVideo: null})
+      }
+    })
+    controller.eventStream.onValue((stream) => {
+      if(stream.action === C.ACTIONS.MARQUEE.LOAD){
+        this.setState({hoverVideo: stream.payload})
+      }
+    })
+    controller.eventStream.onValue((stream) => {
+      if(stream.action === C.ACTIONS.VIDEO.PLAY){
         this.setState({currentVideo: stream.payload})
       }
     })
   }
 
   render() {
+    var marqueeVideo = this.state.hoverVideo || this.state.currentVideo
     return <div>
       <VideoView
         {...this.state.currentVideo}
       />
+      <Marquee {...marqueeVideo} active={marqueeVideo === this.state.currentVideo} />
       {this.state.videos.map((video, index) => {
         return <Video {...video} key={video.id} video={video} active={video === this.state.currentVideo} />
       })}
-      Current Video = {this.state.currentVideo.title}
     </div>
   }
 }

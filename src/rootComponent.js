@@ -4,9 +4,18 @@ var Videos = require("./videosComponent")
 var C      = require("./constants")
 
 style = {
+  body: {
+    maxWidth: 940,
+    background: 'black',
+    margin: 'auto'
+  },
   logo: {
     width: '100%',
-    height: '2em'
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    height: '20vw',
+    marginBottom: '1em'
   },
   meta: {
     maxWidth: 400,
@@ -25,10 +34,10 @@ style = {
 class RootComponent extends React.Component {
 
   render() {
-    return <div>
+    return <div style={style.body}>
       <section style={style.info}>
-        <Videos style={style.videos}  />
         <Logo style={style.logo} src={this.props.logo} alt={this.props.name} href={this.props.url} />
+        <Videos style={style.videos}  />
         <Meta style={style.meta} {...this.props} />
       </section>
     </div>
