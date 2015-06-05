@@ -4,6 +4,29 @@ var Marquee    = require("./marqueeComponent")
 var controller = require("./controller")
 var C          = require("./constants")
 
+var style = {
+  video: {
+    width: 50,
+    height: 50,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderWidth: 3
+  },
+  videosWrap: {
+    padding: 0,
+    margin: 0,
+    listStyle: 'none',
+    display: '-webkit-box',
+    display: '-moz-box',
+    display: '-ms-flexbox',
+    display: '-webkit-flex',
+    display: 'flex',
+    WebkitFlexFlow: 'row wrap',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-around'
+  },
+}
+
 class VideoView extends React.Component {
   render() {
     return <iframe
@@ -24,13 +47,13 @@ class Video extends React.Component {
   }
 
   render() {
-    return <div
+    return <li
       onMouseOut={this._onMouseOut.bind(this)}
       onMouseOver={this._onMouseOver.bind(this)}
       onClick={this._onClick.bind(this)}
       style={this._style()}
     >
-    </div>
+    </li>
   }
 
   _onMouseOut(){
@@ -48,15 +71,9 @@ class Video extends React.Component {
   }
 
   _style() {
-    var result = {
-      width: 50,
-      height: 50,
-      float: 'left',
-      borderColor: 'black',
-      borderStyle: 'solid',
-      borderWidth: 3,
+    var result = _.extend({}, style.video,{
       backgroundImage: `url(${this.props.thumbnail_small})`
-    }
+    })
     if (this.state.hover && !this.props.active) { result.borderColor = 'white' }
     if (this.props.active){ result.borderColor = C.COLORS.BLUE; }
     return result;
@@ -101,9 +118,11 @@ class Videos extends React.Component {
         {...this.state.currentVideo}
       />
       <Marquee {...marqueeVideo} active={marqueeVideo === this.state.currentVideo} />
-      {this.state.videos.map((video, index) => {
-        return <Video {...video} key={video.id} video={video} active={video === this.state.currentVideo} />
-      })}
+      <ul style={style.videosWrap}>
+        {this.state.videos.map((video, index) => {
+          return <Video {...video} key={video.id} video={video} active={video === this.state.currentVideo} />
+        })}
+      </ul>
     </div>
   }
 }
