@@ -1,20 +1,43 @@
 C = require("./constants")
+prettyNum = require("./prettyNum")
 
-style = {
+var style = {
+  container: {
+    backgroundColor: '#151515',
+    lineHeight: '1.5em',
+    textAlign:  'center'
+  },
   link: {
-    color: '#fff'
-  }
+    color: '#fff',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    boxSizing: 'border-box'
+  },
+  description: {
+    fontStyle:     'italic',
+    lineHeight:    '1.2em',
+    marginTop:     '.5em',
+    fontSize:      '.9em',
+    maxWidth:      '500px',
+    margin:        'auto',
+    wordSpacing:   '.2em',
+    letterSpacing: '0.05em'
+  },
+  dimColor: '#AEAEAE'
 }
 
 class MetaComponent extends React.Component {
 
   render() {
-    return <div style={this.props.style}>
-      <div style={{fontSize: '2em'}}>Created By: <a style={style.link} href={this.props.creator_url}>{this.props.creator_display_name}</a> in {moment(this.props.created_on).format('YYYY')}</div>
-      <div style={{fontStyle: 'italic'}}>{this.props.description}</div>
-      <div><a style={style.link} href={this.props.rss}><i className='fa fa-rss'></i>{this.props.name}</a></div>
-      <div><a style={style.link} href={this._videosLink}> {this.props.total_videos} Videos</a></div>
-      <div><a style={style.link} href={this._followersLink}> {this.props.total_subscribers} Followers</a></div>
+    return <div style={_.extend({}, style.container, this.props.style)}>
+      <div style={{fontSize: '1.5em', color: style.dimColor}}>{this.props.name} Channel</div>
+      <div style={{fontSize: '1em', color: style.dimColor}}>Created By: <a style={style.link} href={this.props.creator_url}>{this.props.creator_display_name}</a> in {moment(this.props.created_on).format('YYYY')}</div>
+      <div><a style={style.link} href={this.props.rss}><i className='fa fa-rss'></i> {this.props.name}</a></div>
+      <div>
+        <a style={style.link} href={this._videosLink()}> {prettyNum(this.props.total_videos)} Videos</a>
+        <a style={_.extend({}, style.link, {padding: '0 1em'})} href={this._followersLink()}> {prettyNum(this.props.total_subscribers)} Followers</a>
+      </div>
+      <div style={_.extend({}, style.description, {color: style.dimColor})}>{this.props.description}</div>
     </div>
   }
 

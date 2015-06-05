@@ -18,9 +18,8 @@ style = {
     marginBottom: '1em'
   },
   meta: {
-    maxWidth: 400,
-    textAlign: 'center',
-    margin: 'auto'
+    width: '100%',
+    marginTop:'2em'
   },
 
   info: {
