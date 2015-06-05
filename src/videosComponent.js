@@ -96,7 +96,12 @@ class Videos extends React.Component {
     }
     controller.eventStream.onValue((stream) => {
       if(stream.action === C.ACTIONS.MARQUEE.CLEAR){
-        this.setState({hoverVideo: null})
+        var cached = this.state.hoverVideo
+        setTimeout(() => {
+          if (cached === this.state.hoverVideo){
+            this.setState({hoverVideo: null})
+          }
+        }, 150)
       }
     })
     controller.eventStream.onValue((stream) => {
