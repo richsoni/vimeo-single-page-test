@@ -13,7 +13,6 @@ var eventStream   = App.eventStream = require("./eventStream")
 
 const SEEDS = require("./seeds")
 
-VideoStore.concat(SEEDS.BD_VIDEOS)
 eventStream.push({action: C.ACTIONS.CHANNEL.CHANGE, payload: 'staffpicks'})
 
 var render = () => {

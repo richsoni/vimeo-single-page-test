@@ -91,7 +91,7 @@ class Videos extends React.Component {
     var list = VideoStore.list()
     this.state = {
       videos: list,
-      currentVideo: list[0],
+      currentVideo: list.length ? list[0] : null,
       hoverVideo:   null
     }
     eventStream.onValue((stream) => {

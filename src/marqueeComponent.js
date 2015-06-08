@@ -1,7 +1,17 @@
 C = require("./constants")
 prettyNum = require("./prettyNum")
+var style = {
+    dislay: 'block',
+    clear: 'both',
+    width: '100%',
+    minHeight: 20,
+    textAlign: 'center',
+    backgroundColor: '#000',
+    color: '#fff',
+    padding: 10
+}
 
-class Marquee extends React.Component {
+class Banner  extends React.Component {
   render() {
     var meta = <div style={{marginTop: 10}}>
           <span style={{color: C.COLORS.DIM}}> <i className='fa fa-play'></i> {prettyNum(this.props.stats_number_of_plays)}</span>
@@ -13,7 +23,7 @@ class Marquee extends React.Component {
           </span>
         </div>
     if(this.props.active){
-      return <div style={this._style()}>
+      return <div style={style}>
         <a
           href={this.props.url}
           style={{color: C.COLORS.BLUE, fontWeight: 'bold'}}
@@ -23,7 +33,7 @@ class Marquee extends React.Component {
         {meta}
       </div>
     } else {
-      return <div style={this._style()}>{this.props.title} {meta}</div>
+      return <div style={style}>{this.props.title} {meta}</div>
     }
   }
 
@@ -31,23 +41,22 @@ class Marquee extends React.Component {
     return `https://vimeo.com/${this.props.id}/likes`
   }
 
-  _style() {
-    var result = {
-      dislay: 'block',
-      clear: 'both',
-      width: '100%',
-      minHeight: 20,
-      textAlign: 'center',
-      backgroundColor: '#000',
-      color: '#fff',
-      padding: 10
-    }
-    return result
-  }
 }
-Marquee.propTypes = _.extend({}, C.VIDEO_PROPS, {
+Banner.propTypes = _.extend({}, C.VIDEO_PROPS, {
   active:                   React.PropTypes.bool
 })
 
-Marquee.propTypes = _.extend({}, C.VIDEO_PROPS, {})
+class Marquee extends React.Component {
+  render() {
+    return this.props.video ?
+      <Banner {...this.props.video} active={this.props.active} /> :
+      <div />
+  }
+}
+
+Marquee.propTypes = {
+  active: React.PropTypes.bool,
+  video:  React.PropTypes.object
+}
+
 module.exports = Marquee
