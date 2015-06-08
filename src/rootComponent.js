@@ -30,7 +30,7 @@ style = {
   }
 }
 
-class RootComponent extends React.Component {
+class LoadedComponent extends React.Component {
 
   render() {
     return <div style={style.body}>
@@ -43,7 +43,17 @@ class RootComponent extends React.Component {
   }
 }
 
-RootComponent.propTypes = _.extend({},C.INFO_PROPS, {
+LoadedComponent.propTypes = _.extend({},C.INFO_PROPS, {
     info: React.PropTypes.object
 })
+
+class RootComponent extends React.Component {
+  render() {
+    if(this.props.info){
+      return <LoadedComponent />
+    } else {
+      return <div>...Loading</div>
+    }
+  }
+}
 module.exports = RootComponent

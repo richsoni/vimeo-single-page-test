@@ -47,6 +47,9 @@ module.exports = {
     MARQUEE: {
       LOAD:  {},
       CLEAR: {}
+    },
+    CHANNEL: {
+      CHANGE: {}
     }
   },
 
