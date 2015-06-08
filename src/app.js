@@ -11,8 +11,6 @@ var infoStore     = App.infoStore   = require("./infoStore")
 var VideoStore    = App.videoStore  = require("./videoStore")
 var eventStream   = App.eventStream = require("./eventStream")
 
-const SEEDS = require("./seeds")
-
 eventStream.push({action: C.ACTIONS.CHANNEL.CHANGE, payload: 'staffpicks'})
 
 var render = () => {

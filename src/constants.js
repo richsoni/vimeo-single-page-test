@@ -41,6 +41,9 @@ module.exports = {
     embed_privacy:            React.PropTypes.string
   },
   ACTIONS: {
+    VIDEOS: {
+      CHANGE: {}
+    },
     VIDEO: {
       PLAY: {}
     },
