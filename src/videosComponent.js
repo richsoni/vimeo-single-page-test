@@ -1,8 +1,8 @@
 require('array.prototype.findindex')
-var VideoStore = require("./videoStore")
-var Marquee    = require("./marqueeComponent")
-var controller = require("./controller")
-var C          = require("./constants")
+var VideoStore  = require("./videoStore")
+var Marquee     = require("./marqueeComponent")
+var C           = require("./constants")
+var eventStream = require("./eventStream")
 
 var style = {
   video: {
@@ -58,16 +58,16 @@ class Video extends React.Component {
 
   _onMouseOut(){
     this.setState({hover: false})
-    controller.eventStream.push({action: C.ACTIONS.MARQUEE.CLEAR, payload: null})
+    eventStream.push({action: C.ACTIONS.MARQUEE.CLEAR, payload: null})
   }
 
   _onMouseOver(){
     this.setState({hover: true})
-    controller.eventStream.push({action: C.ACTIONS.MARQUEE.LOAD, payload: this.props.video})
+    eventStream.push({action: C.ACTIONS.MARQUEE.LOAD, payload: this.props.video})
   }
 
   _onClick() {
-    controller.eventStream.push({action: C.ACTIONS.VIDEO.PLAY, payload: this.props.video})
+    eventStream.push({action: C.ACTIONS.VIDEO.PLAY, payload: this.props.video})
   }
 
   _style() {
@@ -94,7 +94,7 @@ class Videos extends React.Component {
       currentVideo: list[0],
       hoverVideo:   null
     }
-    controller.eventStream.onValue((stream) => {
+    eventStream.onValue((stream) => {
       if(stream.action === C.ACTIONS.MARQUEE.CLEAR){
         var cached = this.state.hoverVideo
         setTimeout(() => {
@@ -104,12 +104,12 @@ class Videos extends React.Component {
         }, 150)
       }
     })
-    controller.eventStream.onValue((stream) => {
+    eventStream.onValue((stream) => {
       if(stream.action === C.ACTIONS.MARQUEE.LOAD){
         this.setState({hoverVideo: stream.payload})
       }
     })
-    controller.eventStream.onValue((stream) => {
+    eventStream.onValue((stream) => {
       if(stream.action === C.ACTIONS.VIDEO.PLAY){
         this.setState({currentVideo: stream.payload})
       }
