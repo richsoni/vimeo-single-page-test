@@ -1,14 +1,13 @@
-const SEEDS       = require("./seeds")
+infoStore = require("./infoStore")
 class Controller {
   constructor() {
     this.eventStream   = new Bacon.Bus()
-    this.info          = SEEDS.STAFF_INFO
     this.RootComponent = null
   }
 
   render() {
     if (this.RootComponent) {
-      React.render(<this.RootComponent {...this.info} />, document.body)
+      React.render(<this.RootComponent {...infoStore.toJS()} />, document.body)
     }
   }
 
