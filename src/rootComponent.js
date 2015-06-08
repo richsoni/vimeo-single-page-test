@@ -27,6 +27,18 @@ style = {
     overflow: 'hidden',
     padding: '1em',
     boxSizing: 'border-box'
+  },
+  fullPageLoad: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#000',
+    fontSize: '14vw'
   }
 }
 
@@ -52,7 +64,11 @@ class RootComponent extends React.Component {
     if(this.props.info){
       return <LoadedComponent />
     } else {
-      return <div>...Loading</div>
+      return <div style={style.fullPageLoad}>
+        <div >
+          <i className='fa fa-spinner fa-spin'></i>
+        </div>
+      </div>
     }
   }
 }
