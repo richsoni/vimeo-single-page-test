@@ -1,7 +1,8 @@
-var Logo   = require("./logoComponent")
-var Meta   = require("./metaComponent")
-var Videos = require("./videosComponent")
-var C      = require("./constants")
+var infoStore = require("./infoStore")
+var Logo      = require("./logoComponent")
+var Meta      = require("./metaComponent")
+var Videos    = require("./videosComponent")
+var C         = require("./constants")
 
 style = {
   body: {
@@ -61,8 +62,9 @@ LoadedComponent.propTypes = _.extend({},C.INFO_PROPS, {
 
 class RootComponent extends React.Component {
   render() {
-    if(this.props.info){
-      return <LoadedComponent />
+    var info = infoStore.toJS()
+    if(info.id){
+      return <LoadedComponent {...info} />
     } else {
       return <div style={style.fullPageLoad}>
         <div >

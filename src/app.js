@@ -16,6 +16,9 @@ const SEEDS = require("./seeds")
 VideoStore.concat(SEEDS.BD_VIDEOS)
 eventStream.push({action: C.ACTIONS.CHANNEL.CHANGE, payload: 'staffpicks'})
 
-document.addEventListener("DOMContentLoaded", () => {
-  React.render(<RootComponent {...infoStore.toJS()} />, document.body)
-});
+var render = () => {
+  React.render(<RootComponent />, document.body)
+}
+
+eventStream.onValue(render)
+document.addEventListener("DOMContentLoaded", render)

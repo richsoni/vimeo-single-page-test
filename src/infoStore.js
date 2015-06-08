@@ -29,13 +29,12 @@ var responses = channel
     return new Immutable.Map(response)
   })
 
-responses.onValue((payload) => {
-    data = new Immutable.Map(payload)
+responses.onValue((map) => { data = map })
+responses.onValue((map) => {
+  eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: data})
 })
 
 class InfoStore {
-  constructor() {
-  }
   toJS(){ return data.toJS() }
 }
 

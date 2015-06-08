@@ -50,6 +50,9 @@ module.exports = {
     },
     CHANNEL: {
       CHANGE: {}
+    },
+    INFO: {
+      CHANGE: {}
     }
   },
 
