@@ -2,13 +2,8 @@ var Logo         = require("./logoComponent")
 var Meta         = require("./metaComponent")
 var Videos       = require("./videosComponent")
 var C            = require("./constants")
-var ChannelInput = require("./channelInputComponent")
 
 var style = {
-  body: {
-    maxWidth: 940,
-    margin: 'auto'
-  },
   logo: {
     width: '100%',
     backgroundSize: 'contain',
@@ -34,14 +29,11 @@ var style = {
 class ChannelComponent extends React.Component {
 
   render() {
-    return <div style={style.body}>
-      <ChannelInput />
-      <section style={style.info}>
+    return <section style={style.info}>
         <Logo style={style.logo} src={this.props.logo} alt={this.props.name} href={this.props.url} />
         <Videos style={style.videos}  />
         <Meta style={style.meta} {...this.props} />
       </section>
-    </div>
   }
 }
 

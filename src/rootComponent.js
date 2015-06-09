@@ -1,7 +1,12 @@
 var infoStore        = require("./infoStore")
 var ChannelComponent = require("./channelComponent")
+var ChannelInput = require("./channelInputComponent")
 
 var style = {
+  body: {
+    maxWidth: 940,
+    margin: 'auto'
+  },
   fullPageLoad: {
     position: 'absolute',
     top: 0,
@@ -19,15 +24,15 @@ var style = {
 class RootComponent extends React.Component {
   render() {
     var info = infoStore.toJS()
-    if(info.id){
-      return <ChannelComponent {...info} />
+    if (info.id){
+      var channelComponent = <ChannelComponent {...info} />
     } else {
-      return <div style={style.fullPageLoad}>
-        <div >
-          <i className='fa fa-spinner fa-spin'></i>
-        </div>
-      </div>
+      var channelComponent = <div />
     }
+    return <div style={style.body}>
+      <ChannelInput />
+      {channelComponent}
+    </div>
   }
 }
 module.exports = RootComponent
