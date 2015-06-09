@@ -1,27 +1,27 @@
-C = require("../lib/constants")
+C         = require("../lib/constants")
 prettyNum = require("../util/prettyNum")
 
 var style = {
   container: {
     backgroundColor: '#151515',
-    lineHeight: '1.5em',
-    textAlign:  'center'
+    lineHeight:      '1.5em',
+    textAlign:       'center'
   },
   link: {
-    color: '#fff',
+    color:          '#fff',
     textDecoration: 'none',
-    fontWeight: 'bold',
-    boxSizing: 'border-box'
+    fontWeight:     'bold',
+    boxSizing:      'border-box'
   },
   description: {
-    fontStyle:     'italic',
-    lineHeight:    '1.2em',
-    marginTop:     '.5em',
-    fontSize:      '.9em',
-    maxWidth:      '500px',
-    margin:        'auto',
-    wordSpacing:   '.2em',
-    letterSpacing: '0.05em'
+    fontStyle:      'italic',
+    lineHeight:     '1.2em',
+    marginTop:      '.5em',
+    fontSize:       '.9em',
+    maxWidth:       '500px',
+    margin:         'auto',
+    wordSpacing:    '.2em',
+    letterSpacing:  '0.05em'
   }
 }
 

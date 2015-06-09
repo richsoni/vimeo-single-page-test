@@ -1,8 +1,8 @@
 var eventStream = require("../util/eventStream")
 var style = {
   channelInput: {
-    margin: '1em',
-    padding: '.3em',
+    margin:   '1em',
+    padding:  '.3em',
     fontSize: '1.5em',
   }
 }

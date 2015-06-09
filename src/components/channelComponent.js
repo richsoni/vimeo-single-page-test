@@ -5,24 +5,24 @@ var C            = require("../lib/constants")
 
 var style = {
   logo: {
-    width: '100%',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
+    width:              '100%',
+    backgroundSize:     'contain',
+    backgroundRepeat:   'no-repeat',
     backgroundPosition: 'center',
-    height: '20vw',
-    marginBottom: '1em'
+    height:             '20vw',
+    marginBottom:       '1em'
   },
   meta: {
-    width: '100%',
-    marginTop:'2em'
+    width:     '100%',
+    marginTop: '2em'
   },
 
   info: {
-    width: '100%',
-    overflow: 'hidden',
-    padding: '1em',
+    width:      '100%',
+    overflow:   'hidden',
+    padding:    '1em',
     background: 'black',
-    boxSizing: 'border-box',
+    boxSizing:  'border-box',
   },
 }
 

@@ -1,14 +1,14 @@
 C = require("../lib/constants")
 prettyNum = require("../util/prettyNum")
 var style = {
-    dislay: 'block',
-    clear: 'both',
-    width: '100%',
-    minHeight: 20,
-    textAlign: 'center',
+    dislay:          'block',
+    clear:           'both',
+    width:           '100%',
+    minHeight:       20,
+    textAlign:       'center',
     backgroundColor: '#000',
-    color: '#fff',
-    padding: 10
+    color:           '#fff',
+    padding:         10
 }
 
 class Banner  extends React.Component {

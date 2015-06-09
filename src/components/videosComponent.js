@@ -3,29 +3,24 @@ var VideoStore  = require("../stores/videoStore")
 var Marquee     = require("./marqueeComponent")
 var C           = require("../lib/constants")
 var eventStream = require("../util/eventStream")
+var globalStyle = require("../lib/style")
 
 var style = {
   video: {
-    width: 50,
-    height: 50,
+    width:       50,
+    height:      50,
     borderColor: 'black',
     borderStyle: 'solid',
     borderWidth: 3
   },
   videosWrap: {
-    padding: 0,
-    margin: 0,
-    listStyle: 'none',
-    display: '-webkit-box',
-    display: '-moz-box',
-    display: '-ms-flexbox',
-    display: '-webkit-flex',
-    display: 'flex',
-    WebkitFlexFlow: 'row wrap',
-    flexFlow: 'row wrap',
+    padding:        0,
+    margin:         0,
+    listStyle:      'none',
     justifyContent: 'space-around'
   },
 }
+style.videosWrap = _.extend({}, style.videosWrap, globalStyle.displayFlex, globalStyle.flexFlowRowWrap)
 
 class VideoView extends React.Component {
   render() {

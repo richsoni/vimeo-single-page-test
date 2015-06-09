@@ -1,10 +1,10 @@
 style = {
   container: {
-    height: 200,
-    fontSize: '4em',
-    textAlign: 'center',
-    backgroundSize: "contain",
-    backgroundRepeat: 'no-repeat',
+    height:             200,
+    fontSize:           '4em',
+    textAlign:          'center',
+    backgroundSize:     "contain",
+    backgroundRepeat:   'no-repeat',
     backgroundPosition: 'center'
   }
 }

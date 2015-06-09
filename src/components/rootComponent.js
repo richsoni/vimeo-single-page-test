@@ -5,19 +5,7 @@ var ChannelInput = require("./channelInputComponent")
 var style = {
   body: {
     maxWidth: 940,
-    margin: 'auto'
-  },
-  fullPageLoad: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#000',
-    fontSize: '14vw'
+    margin:   'auto'
   }
 }
 
