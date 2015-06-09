@@ -1,19 +1,8 @@
-var reqwest     = require('reqwest');
 var eventStream = require("../util/eventStream")
 var data = new Immutable.List()
 var buildUrl = (channel) => {
   return `https://vimeo.com/api/v2/channel/${channel}/videos.json`
 }
-var requestStream = (url) => {
-  return Bacon.fromPromise(
-    reqwest({
-      url: url,
-      type: 'json',
-      method: 'get',
-      crossOrigin: true
-  }))
-}
-
 var channel = eventStream
   .filter(eventStream.util.actionIs(C.ACTIONS.CHANNEL.CHANGE))
   .map(eventStream.util.payload)
@@ -21,7 +10,7 @@ var channel = eventStream
 
 var responses = channel
   .map(buildUrl)
-  .flatMapLatest(requestStream)
+  .flatMapLatest(eventStream.util.requestStream)
   .map((response) => {
     return new Immutable.List(response)
   })
