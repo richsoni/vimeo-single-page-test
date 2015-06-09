@@ -19,6 +19,14 @@ var parseChannel = () => {
 }
 
 eventStream.onValue(render)
+eventStream
+  .filter((stream) => { return stream.action === C.ACTIONS.CHANNEL.UPDATE_HASH })
+  .map((stream) => {return stream.payload})
+  .map((channel) => { return  `#!/${channel}`})
+  .log()
+  .onValue((url) => {
+    window.location.hash = url
+  })
 
 document.addEventListener("DOMContentLoaded", render)
 document.addEventListener("DOMContentLoaded", parseChannel)

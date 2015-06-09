@@ -52,10 +52,11 @@ module.exports = {
       CLEAR: {}
     },
     CHANNEL: {
-      CHANGE: {}
+      CHANGE: {},
+      UPDATE_HASH: {}
     },
     INFO: {
-      CHANGE: {}
+      CHANGE: {},
     }
   },
 
