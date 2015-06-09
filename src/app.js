@@ -15,7 +15,6 @@ var eventStream   = App.eventStream = require("./eventStream")
 var render       = () => { React.render(<RootComponent />, document.body) }
 var parseChannel = () => {
   var hash = window.location.hash.replace('#!/', '')
-  console.log(hash)
   eventStream.push({action: C.ACTIONS.CHANNEL.CHANGE, payload: hash})
 }
 
