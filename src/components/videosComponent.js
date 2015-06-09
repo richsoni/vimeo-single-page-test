@@ -1,8 +1,8 @@
 require('array.prototype.findindex')
-var VideoStore  = require("./videoStore")
+var VideoStore  = require("../stores/videoStore")
 var Marquee     = require("./marqueeComponent")
-var C           = require("./constants")
-var eventStream = require("./eventStream")
+var C           = require("../lib/constants")
+var eventStream = require("../util/eventStream")
 
 var style = {
   video: {

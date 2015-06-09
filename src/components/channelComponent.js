@@ -1,7 +1,7 @@
 var Logo         = require("./logoComponent")
 var Meta         = require("./metaComponent")
 var Videos       = require("./videosComponent")
-var C            = require("./constants")
+var C            = require("../lib/constants")
 
 var style = {
   logo: {

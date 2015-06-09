@@ -1,9 +1,12 @@
 var reqwest     = require('reqwest');
-var eventStream = require("./eventStream")
-var data = new Immutable.List()
+var eventStream = require("../util/eventStream")
+
+var data = new Immutable.Map()
+
 var buildUrl = (channel) => {
-  return `https://vimeo.com/api/v2/channel/${channel}/videos.json`
+  return `https://vimeo.com/api/v2/channel/${channel}/info.json`
 }
+
 var requestStream = (url) => {
   return Bacon.fromPromise(
     reqwest({
@@ -23,16 +26,20 @@ var responses = channel
   .map(buildUrl)
   .flatMapLatest(requestStream)
   .map((response) => {
-    return new Immutable.List(response)
+    return new Immutable.Map(response)
   })
 
-responses.onValue((list) => { data = list })
 responses.onValue((map) => {
-  eventStream.push({action: C.ACTIONS.VIDEOS.CHANGE, payload: data})
+  data = map
+  eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: data})
+})
+responses.onError((map) => {
+  data = new Immutable.Map()
+  eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: data})
 })
 
-class VideoStore {
-  list(){ return data.toArray() }
+class InfoStore {
+  toJS(){ return data.toJS() }
 }
 
-module.exports = new VideoStore()
+module.exports = global.App.infoStore = new InfoStore()

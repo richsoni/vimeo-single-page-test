@@ -1,4 +1,4 @@
-var infoStore        = require("./infoStore")
+var infoStore        = require("../stores/infoStore")
 var ChannelComponent = require("./channelComponent")
 var ChannelInput = require("./channelInputComponent")
 

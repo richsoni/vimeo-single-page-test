@@ -1,4 +1,4 @@
-var eventStream = require("./eventStream")
+var eventStream = require("../util/eventStream")
 var style = {
   channelInput: {
     margin: '1em',

@@ -1,5 +1,5 @@
-C = require("./constants")
-prettyNum = require("./prettyNum")
+C = require("../lib/constants")
+prettyNum = require("../util/prettyNum")
 
 var style = {
   container: {

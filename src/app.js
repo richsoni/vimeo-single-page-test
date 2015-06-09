@@ -1,16 +1,13 @@
-
 global.React     = require("react")
 global.Bacon     = require("baconjs")
 global.moment    = require("moment")
 global._         = require("underscore")
 global.Immutable = require("immutable")
 global.qs        = require("query-string")
-
-var RootComponent = require("./rootComponent")
 global.App = {}
-var infoStore     = App.infoStore   = require("./infoStore")
-var VideoStore    = App.videoStore  = require("./videoStore")
-var eventStream   = App.eventStream = require("./eventStream")
+
+var RootComponent = require("./components/rootComponent")
+var eventStream   = require("./util/eventStream")
 
 var render       = () => { React.render(<RootComponent />, document.body) }
 var parseChannel = () => {
