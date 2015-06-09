@@ -94,35 +94,38 @@ class Videos extends React.Component {
       currentVideo: list.length ? list[0] : null,
       hoverVideo:   null
     }
-    eventStream.onValue((stream) => {
-      if(stream.action === C.ACTIONS.VIDEOS.CHANGE){
-        list = stream.payload.toArray()
+    eventStream
+      .filter(eventStream.util.actionIs(C.ACTIONS.VIDEOS.CHANGE))
+      .map(eventStream.util.payload)
+      .map((immutableList) => { return immutableList.toArray() })
+      .onValue((list) => {
         this.setState({
           videos: list,
           currentVideo: list.length ? list[0] : null,
         })
-      }
     })
-    eventStream.onValue((stream) => {
-      if(stream.action === C.ACTIONS.MARQUEE.CLEAR){
+    eventStream
+      .filter(eventStream.util.actionIs(C.ACTIONS.MARQUEE.CLEAR))
+      .onValue((stream) => {
         var cached = this.state.hoverVideo
         setTimeout(() => {
           if (cached === this.state.hoverVideo){
             this.setState({hoverVideo: null})
           }
         }, 150)
-      }
-    })
-    eventStream.onValue((stream) => {
-      if(stream.action === C.ACTIONS.MARQUEE.LOAD){
-        this.setState({hoverVideo: stream.payload})
-      }
-    })
-    eventStream.onValue((stream) => {
-      if(stream.action === C.ACTIONS.VIDEO.PLAY){
-        this.setState({currentVideo: stream.payload})
-      }
-    })
+      })
+    eventStream
+      .filter(eventStream.util.actionIs(C.ACTIONS.MARQUEE.LOAD))
+      .map(eventStream.util.payload)
+      .onValue((video) => {
+        this.setState({hoverVideo: video})
+      })
+    eventStream
+      .filter(eventStream.util.actionIs(C.ACTIONS.VIDEO.PLAY))
+      .map(eventStream.util.payload)
+      .onValue((video) => {
+        this.setState({currentVideo: video})
+      })
   }
 
   render() {

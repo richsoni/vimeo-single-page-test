@@ -17,10 +17,9 @@ var parseChannel = () => {
 
 eventStream.onValue(render)
 eventStream
-  .filter((stream) => { return stream.action === C.ACTIONS.CHANNEL.UPDATE_HASH })
-  .map((stream) => {return stream.payload})
+  .filter(eventStream.util.actionIs(C.ACTIONS.CHANNEL.UPDATE_HASH))
+  .map(eventStream.util.payload)
   .map((channel) => { return  `#!/${channel}`})
-  .log()
   .onValue((url) => {
     window.location.hash = url
   })

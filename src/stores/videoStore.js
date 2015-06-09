@@ -15,8 +15,8 @@ var requestStream = (url) => {
 }
 
 var channel = eventStream
-  .filter((stream) => { return stream.action === C.ACTIONS.CHANNEL.CHANGE})
-  .map((stream)    => { return stream.payload })
+  .filter(eventStream.util.actionIs(C.ACTIONS.CHANNEL.CHANGE))
+  .map(eventStream.util.payload)
   .toProperty()
 
 var responses = channel
