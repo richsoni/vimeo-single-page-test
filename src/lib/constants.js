@@ -64,7 +64,7 @@ module.exports = {
   },
   COPY: {
     ERROR: {
-      NO_CHANNEL: 'No Such Channel Exists'
+      NO_CHANNEL: 'No Such Channel Exists (try staffpicks)'
     }
   },
 
