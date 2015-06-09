@@ -9,13 +9,13 @@ global.App = {}
 var RootComponent = require("./components/rootComponent")
 var eventStream   = require("./util/eventStream")
 
+/* RENDER APP WIRING */
 var render       = () => { React.render(<RootComponent />, document.body) }
-var parseChannel = () => {
-  var hash = window.location.hash.replace('#!/', '')
-  eventStream.push({action: C.ACTIONS.CHANNEL.CHANGE, payload: hash})
-}
-
 eventStream.onValue(render)
+document.addEventListener("DOMContentLoaded", render)
+
+
+/* BARBARIC ROUTING */
 eventStream
   .filter(eventStream.util.actionIs(C.ACTIONS.CHANNEL.UPDATE_HASH))
   .map(eventStream.util.payload)
@@ -24,6 +24,10 @@ eventStream
     window.location.hash = url
   })
 
-document.addEventListener("DOMContentLoaded", render)
+var parseChannel = () => {
+  var hash = window.location.hash.replace('#!/', '')
+  eventStream.push({action: C.ACTIONS.CHANNEL.CHANGE, payload: hash})
+}
+
 document.addEventListener("DOMContentLoaded", parseChannel)
 window.addEventListener('hashchange', parseChannel)
