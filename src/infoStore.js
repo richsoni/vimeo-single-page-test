@@ -29,8 +29,12 @@ var responses = channel
     return new Immutable.Map(response)
   })
 
-responses.onValue((map) => { data = map })
 responses.onValue((map) => {
+  data = map
+  eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: data})
+})
+responses.onError((map) => {
+  data = new Immutable.Map()
   eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: data})
 })
 
