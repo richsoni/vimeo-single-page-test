@@ -1,5 +1,6 @@
 var reqwest     = require('reqwest');
 var eventStream = require("../util/eventStream")
+var C           = require("../lib/constants")
 
 var data = new Immutable.Map()
 
@@ -36,6 +37,7 @@ responses.onValue((map) => {
 responses.onError((map) => {
   data = new Immutable.Map()
   eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: data})
+  eventStream.push({action: C.ACTIONS.ERROR.GLOBAL, payload: C.COPY.ERROR.NO_CHANNEL})
 })
 
 class InfoStore {

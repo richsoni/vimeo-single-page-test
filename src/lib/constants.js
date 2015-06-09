@@ -57,6 +57,14 @@ module.exports = {
     },
     INFO: {
       CHANGE: {},
+    },
+    ERROR: {
+      GLOBAL: {}
+    }
+  },
+  COPY: {
+    ERROR: {
+      NO_CHANNEL: 'No Such Channel Exists'
     }
   },
 
