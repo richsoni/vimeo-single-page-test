@@ -2,7 +2,7 @@ var eventStream = require("../util/eventStream")
 var C           = require("../lib/constants")
 
 var data = new Immutable.List()
-var page = 1
+var page = 2
 var url = ''
 
 //helper functions

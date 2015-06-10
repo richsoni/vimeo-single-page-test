@@ -1,4 +1,5 @@
 module.exports = (number) => {
+  number = number || 0
   var _num = number.toString()
   if(_num.length > 3 && _num.length < 7){
     return `${_num.substring(0,_num.length - 3)}K`

@@ -80,7 +80,7 @@ class Videos extends React.Component {
       <VideoView
         {...this.state.currentVideo}
       />
-      <Marquee {...marqueeVideo} active={marqueeVideo === this.state.currentVideo} />
+      <Marquee video={marqueeVideo} active={marqueeVideo === this.state.currentVideo} />
       <ul style={style.videosWrap}>
         {this.state.videos.map((video, index) => {
           return <Video {...video} key={index} video={video} active={video === this.state.currentVideo} />
@@ -95,7 +95,7 @@ class Videos extends React.Component {
   }
 
   _moreButton() {
-    if (this.props.total > this.state.videos.length && C.TOTAL_ITEMS >= this.state.videos.length){
+    if (this.props.total > this.state.videos.length && C.TOTAL_ITEMS > this.state.videos.length){
       return <a
         onClick={this._moreVideos.bind(this)}
         style={style.moreButton}
