@@ -14,25 +14,21 @@ var triggerChange = (list) => {
   eventStream.push({action: C.ACTIONS.VIDEOS.CHANGE, payload: list})
 }
 
-//channel name stream
-var channelStream = eventStream
+//properties
+var channelProp = eventStream
   .filter(eventStream.util.actionIs(C.ACTIONS.CHANNEL.CHANGE))
   .map(eventStream.util.payload)
   .toProperty()
 
-// total stream
-var totalStream = eventStream
-  .filter(eventStream.util.actionIs(C.ACTIONS.INFO.CHANGE))
-  .map(eventStream.util.payload)
-  .map((info) => { return info.total_videos })
-
 // ajax stream
-var responseStream = channelStream
+var responseStream = channelProp
   .map(buildUrl)
   .flatMapLatest(eventStream.util.requestStream)
 
 //events
 responseStream.onValue(newList)
 responseStream.onValue(triggerChange)
+channelProp.map([]).onValue(newList)
+channelProp.map([]).onValue(triggerChange)
 
 module.exports = global.App.videoStore  = data

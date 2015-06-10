@@ -86,40 +86,43 @@ class Videos extends React.Component {
     this.state = {
       videos: [],
       currentVideo: null,
-      hoverVideo:   null
+      hoverVideo:   null,
+      total:        0,
     }
-    eventStream
-      .filter(eventStream.util.actionIs(C.ACTIONS.VIDEOS.CHANGE))
-      .map(eventStream.util.payload)
-      .onValue((list) => {
-        this.setState({
-          videos: list,
-          currentVideo: list.length ? list[0] : null,
-        })
-    })
-    eventStream
-      .filter(eventStream.util.actionIs(C.ACTIONS.MARQUEE.CLEAR))
-      .onValue((stream) => {
-        var cached = this.state.hoverVideo
-        setTimeout(() => {
-          if (cached === this.state.hoverVideo){
-            this.setState({hoverVideo: null})
-          }
-        }, 150)
-      })
-    eventStream
-      .filter(eventStream.util.actionIs(C.ACTIONS.MARQUEE.LOAD))
-      .map(eventStream.util.payload)
-      .onValue((video) => {
-        this.setState({hoverVideo: video})
-      })
-    eventStream
-      .filter(eventStream.util.actionIs(C.ACTIONS.VIDEO.PLAY))
-      .map(eventStream.util.payload)
-      .onValue((video) => {
-        this.setState({currentVideo: video})
-      })
+
+    this.streamSubscriptions = [
+      eventStream
+        .filter(eventStream.util.actionIs(C.ACTIONS.VIDEO.PLAY))
+        .map(eventStream.util.payload)
+        .onValue((payload) => { this.setState({currentVideo: payload})}),
+
+      eventStream
+        .filter(eventStream.util.actionIs(C.ACTIONS.MARQUEE.LOAD))
+        .map(eventStream.util.payload)
+        .onValue((payload) => { this.setState({hoverVideo: payload})}),
+
+      eventStream
+        .filter(eventStream.util.actionIs(C.ACTIONS.MARQUEE.CLEAR))
+        .onValue(this._resetHover.bind(this)),
+
+      eventStream
+        .filter(eventStream.util.actionIs(C.ACTIONS.INFO.CHANGE))
+        .map(eventStream.util.payload)
+        .map((info) => { return info.total_videos })
+        .onValue((payload) => { this.setState({total: payload})}),
+
+      eventStream
+        .filter(eventStream.util.actionIs(C.ACTIONS.VIDEOS.CHANGE))
+        .map(eventStream.util.payload)
+        .onValue((list) => {
+            this.setState({
+              videos: list,
+              currentVideo: list.length ? list[0] : null,
+            })
+        }),
+    ]
   }
+
 
   render() {
     var marqueeVideo = this.state.hoverVideo || this.state.currentVideo
@@ -133,7 +136,36 @@ class Videos extends React.Component {
           return <Video {...video} key={video.id} video={video} active={video === this.state.currentVideo} />
         })}
       </ul>
+      {this._moreButton}
     </div>
+  }
+
+  componentWillUnmount() {
+    this.streamSubscriptions.map((unsubscribe) =>{ console.log(unsubscribe()) })
+  }
+
+  _moreButton() {
+    if (this.state){
+      <a
+        onClick={this._moreVideos.bind(this)}
+      >
+        More Videos
+      </a>
+    } else {
+      <div />
+    }
+  }
+
+  _moreVideos() {
+  
+  }
+  _resetHover() {
+    var cached = this.state.hoverVideo
+    setTimeout(() => {
+      if (cached === this.state.hoverVideo){
+        this.setState({hoverVideo: null})
+      }
+    }, 150)
   }
 }
 

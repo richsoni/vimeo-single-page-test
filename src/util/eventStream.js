@@ -17,6 +17,6 @@ stream.util = {
         method: 'get',
         crossOrigin: true
     }))
-  }
+  },
 }
 module.exports = stream
