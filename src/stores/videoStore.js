@@ -8,6 +8,7 @@ var url = ''
 //helper functions
 var updateList = (list) => { data = data.concat(list)}
 var newList = (list) => { data = new Immutable.List(list) }
+var newPageCount = () => { page = 2 }
 
 var buildUrl = (channel) => {
   return `https://vimeo.com/api/v2/channel/${channel}/videos.json`
@@ -44,6 +45,7 @@ moreStream.onValue(updateList)
 moreStream.onValue(triggerChange)
 channelStream.onValue((value) => {url =  value})
 channelStream.map([]).onValue(newList)
+channelStream.map([]).onValue(newPageCount)
 channelStream.map([]).onValue(triggerChange)
 
 module.exports = global.App.videoStore  = data
