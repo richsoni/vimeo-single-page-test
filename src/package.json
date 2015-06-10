@@ -6,13 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "iojs": "2.1.x"
+  },
   "author": "rich soni",
   "dependencies": {
     "array.prototype.findindex": "^1.0.0",
     "baconjs": "^0.7.61",
     "browserify": "^10.2.3",
-    "del": "^1.2.0",
-    "ejs": "^2.3.1",
     "immutable": "^3.7.3",
     "moment": "^2.10.3",
     "react": "^0.13.3",

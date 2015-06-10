@@ -1,3 +1,43 @@
+# Getting Started
+
+## Install The Proper IO.JS version
+
+The engine in the `package.json` file is 'iojs'.
+npm does not enforce iojs at the moment.
+To make sure you have the right version, install it with [n](https://www.npmjs.com/package/n).
+
+Follow these steps to get a successful install.
+
+```
+$ cd src
+$ cat package.json| grep iojs
+    "iojs": "2.1.x"
+$ npm install -g n
+$ n io 2.1
+$ rm -rf node_modules
+$ npm install
+```
+
+## Locally Serving
+
+The `bin` directory has two scripts for use during development:
+
+*  `build`
+*  `serve`
+
+All javascript is compiled into a single app.js via the `bin/build` script (e.g. browserify).
+Running `bin/serve` will start a simple python server on port 8000.
+
+The site can then be accessed via `localhost:8000`
+
+# Improvements
+
+*  Replace hash bang url's with proper push state.  This requires a more robust server architecture to be implemented
+*  Harden error handling around pagination of videos
+*  Add css animations
+*  Properly get vendor assets from cdn's while maintaining npm as version control
+*  auto advance videos upon completion
+
 # Video Endpoints
 
 ## Videos (by channel id)
