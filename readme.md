@@ -1,3 +1,6 @@
+# Demo
+Find the demo [here](https://github.com/richsoni/vimeo-single-page-test)
+
 # Getting Started
 
 ## Install The Proper IO.JS version
