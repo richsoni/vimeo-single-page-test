@@ -9,6 +9,8 @@ global.App = {}
 var RootComponent = require("./components/rootComponent")
 var eventStream   = require("./util/eventStream")
 var C             = require("./lib/constants")
+require("./stores/videoStore")
+require("./stores/infoStore")
 
 /* RENDER APP WIRING */
 var render       = () => { React.render(<RootComponent />, document.body) }
