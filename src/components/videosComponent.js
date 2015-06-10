@@ -87,7 +87,6 @@ class Videos extends React.Component {
       videos: [],
       currentVideo: null,
       hoverVideo:   null,
-      total:        0,
     }
 
     this.streamSubscriptions = [
@@ -104,12 +103,6 @@ class Videos extends React.Component {
       eventStream
         .filter(eventStream.util.actionIs(C.ACTIONS.MARQUEE.CLEAR))
         .onValue(this._resetHover.bind(this)),
-
-      eventStream
-        .filter(eventStream.util.actionIs(C.ACTIONS.INFO.CHANGE))
-        .map(eventStream.util.payload)
-        .map((info) => { return info.total_videos })
-        .onValue((payload) => { this.setState({total: payload})}),
 
       eventStream
         .filter(eventStream.util.actionIs(C.ACTIONS.VIDEOS.CHANGE))
@@ -136,7 +129,7 @@ class Videos extends React.Component {
           return <Video {...video} key={video.id} video={video} active={video === this.state.currentVideo} />
         })}
       </ul>
-      {this._moreButton}
+      {this._moreButton()}
     </div>
   }
 
@@ -145,14 +138,14 @@ class Videos extends React.Component {
   }
 
   _moreButton() {
-    if (this.state){
-      <a
+    if (this.props.total > this.state.videos.length){
+      return <a
         onClick={this._moreVideos.bind(this)}
       >
         More Videos
       </a>
     } else {
-      <div />
+      return <div />
     }
   }
 

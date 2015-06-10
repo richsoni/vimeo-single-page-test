@@ -31,7 +31,10 @@ class ChannelComponent extends React.Component {
   render() {
     return <section style={style.info}>
         <Logo style={style.logo} src={this.props.logo} alt={this.props.name} href={this.props.url} />
-        <Videos style={style.videos}  />
+        <Videos
+          style={style.videos}
+          total={this.props.total_videos}
+        />
         <Meta style={style.meta} {...this.props} />
       </section>
   }
