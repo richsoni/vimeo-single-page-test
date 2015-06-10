@@ -18,19 +18,27 @@ var style = {
 
 class RootComponent extends React.Component {
   constructor() {
-    this.state = {error: null}
+    this.state = {
+      error:  null,
+      info:   {},
+    }
     eventStream
       .filter(eventStream.util.actionIs(C.ACTIONS.ERROR.GLOBAL))
       .map(eventStream.util.payload)
       .onValue((error) => {
         this.setState({error: error})
       })
+    eventStream
+      .filter(eventStream.util.actionIs(C.ACTIONS.INFO.CHANGE))
+      .map(eventStream.util.payload)
+      .onValue((info) => {
+        this.setState({info: info})
+      })
   }
 
   render() {
-    var info = infoStore.toJS()
-    if (info.id){
-      var channelComponent = <ChannelComponent {...info} />
+    if (this.state.info.id){
+      var channelComponent = <ChannelComponent {...this.state.info} />
     } else {
       var channelComponent = <div style={style.error}>{this.state.error}</div>
     }

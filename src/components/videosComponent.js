@@ -83,16 +83,14 @@ Video.propTypes = _.extend({}, C.VIDEO_PROPS, {})
 class Videos extends React.Component {
 
   constructor() {
-    var list = VideoStore.list()
     this.state = {
-      videos: list,
-      currentVideo: list.length ? list[0] : null,
+      videos: [],
+      currentVideo: null,
       hoverVideo:   null
     }
     eventStream
       .filter(eventStream.util.actionIs(C.ACTIONS.VIDEOS.CHANGE))
       .map(eventStream.util.payload)
-      .map((immutableList) => { return immutableList.toArray() })
       .onValue((list) => {
         this.setState({
           videos: list,

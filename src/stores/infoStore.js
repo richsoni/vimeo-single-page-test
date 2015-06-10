@@ -13,7 +13,7 @@ var triggerChange = (map) => {
   eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: map})
 }
 
-var newInfo   = (map) => { data = map }
+var newInfo   = (map) => { data = data.mergeDeep(map) }
 var flushInfo = (map) => {
   data = new Immutable.Map()
   eventStream.push({action: C.ACTIONS.INFO.CHANGE, payload: data})
@@ -21,30 +21,22 @@ var flushInfo = (map) => {
 var triggerError = () => {
   eventStream.push({action: C.ACTIONS.ERROR.GLOBAL, payload: C.COPY.ERROR.NO_CHANNEL})
 }
-//channel name stream
 
-var channel = eventStream
+//channel name stream
+var channelStream = eventStream
   .filter(eventStream.util.actionIs(C.ACTIONS.CHANNEL.CHANGE))
   .map(eventStream.util.payload)
   .toProperty()
 
 // ajax stream
-var responses = channel
+var responseStream = channelStream
   .map(buildUrl)
   .flatMapLatest(eventStream.util.requestStream)
-  .map((response) => {
-    return new Immutable.Map(response)
-  })
 
 //events
-responses.onValue(newInfo)
-responses.onValue(triggerChange)
-responses.onError(flushInfo)
-responses.onError(triggerError)
+responseStream.onValue(newInfo)
+responseStream.onValue(triggerChange)
+responseStream.onError(flushInfo)
+responseStream.onError(triggerError)
 
-//public API
-class InfoStore {
-  toJS(){ return data.toJS() }
-}
-
-module.exports = global.App.infoStore = new InfoStore()
+module.exports = global.App.infoStore = data
