@@ -12,6 +12,14 @@ var style = {
     listStyle:      'none',
     justifyContent: 'space-around'
   },
+  moreButton: {
+    textDecoration: 'underline',
+    width: '100%',
+    textAlign: 'center',
+    cursor: 'pointer',
+    display: 'block',
+    marginTop: 15
+  }
 }
 style.videosWrap = _.extend({}, style.videosWrap, globalStyle.displayFlex, globalStyle.flexFlowRowWrap)
 
@@ -90,6 +98,7 @@ class Videos extends React.Component {
     if (this.props.total > this.state.videos.length && C.TOTAL_ITEMS >= this.state.videos.length){
       return <a
         onClick={this._moreVideos.bind(this)}
+        style={style.moreButton}
       >
         More Videos
       </a>
