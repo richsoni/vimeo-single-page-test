@@ -75,7 +75,7 @@ class Videos extends React.Component {
       <Marquee {...marqueeVideo} active={marqueeVideo === this.state.currentVideo} />
       <ul style={style.videosWrap}>
         {this.state.videos.map((video, index) => {
-          return <Video {...video} key={video.id} video={video} active={video === this.state.currentVideo} />
+          return <Video {...video} key={index} video={video} active={video === this.state.currentVideo} />
         })}
       </ul>
       {this._moreButton()}
@@ -83,11 +83,11 @@ class Videos extends React.Component {
   }
 
   componentWillUnmount() {
-    this.streamSubscriptions.map((unsubscribe) =>{ console.log(unsubscribe()) })
+    this.streamSubscriptions.map((unsubscribe) =>{ unsubscribe() })
   }
 
   _moreButton() {
-    if (this.props.total > this.state.videos.length){
+    if (this.props.total > this.state.videos.length && C.TOTAL_ITEMS >= this.state.videos.length){
       return <a
         onClick={this._moreVideos.bind(this)}
       >
@@ -99,7 +99,7 @@ class Videos extends React.Component {
   }
 
   _moreVideos() {
-  
+    eventStream.push({action: C.ACTIONS.VIDEOS.MORE, payload: null})
   }
   _resetHover() {
     var cached = this.state.hoverVideo

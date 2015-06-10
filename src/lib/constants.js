@@ -42,7 +42,8 @@ module.exports = {
   },
   ACTIONS: {
     VIDEOS: {
-      CHANGE: {}
+      CHANGE: {},
+      MORE: {},
     },
     VIDEO: {
       PLAY: {}
@@ -71,6 +72,8 @@ module.exports = {
   COLORS: {
     BLUE: 'rgb(0, 173, 239)',
     DIM:  '#AEAEAE'
-  }
+  },
+
+  TOTAL_ITEMS: 60
 
 }
